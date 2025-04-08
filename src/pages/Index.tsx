@@ -20,7 +20,7 @@ const Index = () => {
         <AppSidebar />
         <main className="flex-1 p-6 md:p-10 max-w-7xl mx-auto w-full animate-fade-in">
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-lexi-black">Lexi Sign Language Translator</h1>
+            <h1 className="text-3xl font-bold text-lexi-black">r</h1>
             <p className="text-lexi-darkgray mt-2">
               Start signing to translate sign language into text in real-time
             </p>
