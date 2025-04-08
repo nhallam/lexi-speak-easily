@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { loadHandposeModel, createGestureEstimator, detectSignGesture } from "@/utils/signLanguageDetection";
-import { toast } from "@/components/ui/sonner";
+import { toast } from "@/hooks/use-toast";
 
 interface VideoStreamProps {
   onTranslationText: (text: string) => void;
