@@ -47,7 +47,11 @@ const VideoStream: React.FC<VideoStreamProps> = ({ onTranslationText }) => {
       }
     } catch (err) {
       console.error("Error accessing camera:", err);
-      toast.error("Unable to access camera. Please check permissions.");
+      toast({
+        variant: "destructive",
+        title: "Camera Error",
+        description: "Unable to access camera. Please check permissions."
+      });
     }
   };
 
@@ -55,7 +59,10 @@ const VideoStream: React.FC<VideoStreamProps> = ({ onTranslationText }) => {
   const loadModel = async () => {
     try {
       setLoadingModel(true);
-      toast.info("Loading sign language detection model...");
+      toast({
+        title: "Loading Model",
+        description: "Loading sign language detection model..."
+      });
       
       // Load the handpose model
       const model = await loadHandposeModel();
@@ -68,10 +75,17 @@ const VideoStream: React.FC<VideoStreamProps> = ({ onTranslationText }) => {
       setModelLoaded(true);
       setLoadingModel(false);
       
-      toast.success("Sign language detection model loaded!");
+      toast({
+        title: "Model Loaded",
+        description: "Sign language detection model loaded!"
+      });
     } catch (err) {
       console.error("Error loading model:", err);
-      toast.error("Failed to load sign language detection model.");
+      toast({
+        variant: "destructive",
+        title: "Model Error",
+        description: "Failed to load sign language detection model."
+      });
       setLoadingModel(false);
     }
   };
@@ -99,7 +113,10 @@ const VideoStream: React.FC<VideoStreamProps> = ({ onTranslationText }) => {
   // Toggle translation
   const toggleTranslation = () => {
     if (!translating && !modelLoaded && !loadingModel) {
-      toast.info("Please wait while the model loads...");
+      toast({
+        title: "Loading Model",
+        description: "Please wait while the model loads..."
+      });
       loadModel().then(() => {
         setTranslating(true);
       });
@@ -235,7 +252,10 @@ const VideoStream: React.FC<VideoStreamProps> = ({ onTranslationText }) => {
             <DropdownMenuItem onClick={() => {
               detectedGesturesRef.current = [];
               onTranslationText("");
-              toast.success("Translation cleared");
+              toast({
+                title: "Translation Cleared",
+                description: "Translation has been cleared."
+              });
             }}>
               Clear Translation
             </DropdownMenuItem>
