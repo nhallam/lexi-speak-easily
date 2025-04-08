@@ -104,6 +104,64 @@ const defineSignGestures = () => {
   waterSign.addCurl(fp.Finger.Ring, fp.FingerCurl.NoCurl, 1.0);
   waterSign.addCurl(fp.Finger.Pinky, fp.FingerCurl.HalfCurl, 1.0);
   
+  // NEW ADDITIONAL SIGNS
+  
+  // Food sign - fingers bunched together touching lips
+  const foodSign = new fp.GestureDescription('food');
+  foodSign.addCurl(fp.Finger.Thumb, fp.FingerCurl.HalfCurl, 1.0);
+  foodSign.addCurl(fp.Finger.Index, fp.FingerCurl.HalfCurl, 1.0);
+  foodSign.addCurl(fp.Finger.Middle, fp.FingerCurl.HalfCurl, 1.0);
+  foodSign.addCurl(fp.Finger.Ring, fp.FingerCurl.HalfCurl, 1.0);
+  foodSign.addCurl(fp.Finger.Pinky, fp.FingerCurl.HalfCurl, 1.0);
+  
+  // Friend sign - hooked index fingers interlocking
+  const friendSign = new fp.GestureDescription('friend');
+  friendSign.addCurl(fp.Finger.Thumb, fp.FingerCurl.HalfCurl, 1.0);
+  friendSign.addCurl(fp.Finger.Index, fp.FingerCurl.HalfCurl, 1.0);
+  friendSign.addCurl(fp.Finger.Middle, fp.FingerCurl.FullCurl, 1.0);
+  friendSign.addCurl(fp.Finger.Ring, fp.FingerCurl.FullCurl, 1.0);
+  friendSign.addCurl(fp.Finger.Pinky, fp.FingerCurl.FullCurl, 1.0);
+  
+  // Home sign - thumb to cheek with fingers extended
+  const homeSign = new fp.GestureDescription('home');
+  homeSign.addCurl(fp.Finger.Thumb, fp.FingerCurl.NoCurl, 1.0);
+  homeSign.addCurl(fp.Finger.Index, fp.FingerCurl.NoCurl, 1.0);
+  homeSign.addCurl(fp.Finger.Middle, fp.FingerCurl.NoCurl, 1.0);
+  homeSign.addCurl(fp.Finger.Ring, fp.FingerCurl.NoCurl, 1.0);
+  homeSign.addCurl(fp.Finger.Pinky, fp.FingerCurl.NoCurl, 1.0);
+  
+  // Work sign - fists tapping on top of each other
+  const workSign = new fp.GestureDescription('work');
+  workSign.addCurl(fp.Finger.Thumb, fp.FingerCurl.HalfCurl, 1.0);
+  workSign.addCurl(fp.Finger.Index, fp.FingerCurl.FullCurl, 1.0);
+  workSign.addCurl(fp.Finger.Middle, fp.FingerCurl.FullCurl, 1.0);
+  workSign.addCurl(fp.Finger.Ring, fp.FingerCurl.FullCurl, 1.0);
+  workSign.addCurl(fp.Finger.Pinky, fp.FingerCurl.FullCurl, 1.0);
+  
+  // School sign - palms facing each other opening and closing like a book
+  const schoolSign = new fp.GestureDescription('school');
+  schoolSign.addCurl(fp.Finger.Thumb, fp.FingerCurl.NoCurl, 1.0);
+  schoolSign.addCurl(fp.Finger.Index, fp.FingerCurl.NoCurl, 1.0);
+  schoolSign.addCurl(fp.Finger.Middle, fp.FingerCurl.NoCurl, 1.0);
+  schoolSign.addCurl(fp.Finger.Ring, fp.FingerCurl.NoCurl, 1.0);
+  schoolSign.addCurl(fp.Finger.Pinky, fp.FingerCurl.NoCurl, 1.0);
+  
+  // Family sign - both hands making F handshape moving in circle
+  const familySign = new fp.GestureDescription('family');
+  familySign.addCurl(fp.Finger.Thumb, fp.FingerCurl.NoCurl, 1.0);
+  familySign.addCurl(fp.Finger.Index, fp.FingerCurl.NoCurl, 1.0);
+  familySign.addCurl(fp.Finger.Middle, fp.FingerCurl.FullCurl, 1.0);
+  familySign.addCurl(fp.Finger.Ring, fp.FingerCurl.FullCurl, 1.0);
+  familySign.addCurl(fp.Finger.Pinky, fp.FingerCurl.FullCurl, 1.0);
+  
+  // Happy sign - open hand circling up and down on chest
+  const happySign = new fp.GestureDescription('happy');
+  happySign.addCurl(fp.Finger.Thumb, fp.FingerCurl.NoCurl, 1.0);
+  happySign.addCurl(fp.Finger.Index, fp.FingerCurl.NoCurl, 1.0);
+  happySign.addCurl(fp.Finger.Middle, fp.FingerCurl.NoCurl, 1.0);
+  happySign.addCurl(fp.Finger.Ring, fp.FingerCurl.NoCurl, 1.0);
+  happySign.addCurl(fp.Finger.Pinky, fp.FingerCurl.NoCurl, 1.0);
+
   // Add all signs to the gestures dictionary
   SignGestures['hello'] = helloSign;
   SignGestures['thank you'] = thankYouSign;
@@ -117,6 +175,13 @@ const defineSignGestures = () => {
   SignGestures['good'] = goodSign;
   SignGestures['bad'] = badSign;
   SignGestures['water'] = waterSign;
+  SignGestures['food'] = foodSign;
+  SignGestures['friend'] = friendSign;
+  SignGestures['home'] = homeSign;
+  SignGestures['work'] = workSign;
+  SignGestures['school'] = schoolSign;
+  SignGestures['family'] = familySign;
+  SignGestures['happy'] = happySign;
   
   return SignGestures;
 };
@@ -175,3 +240,4 @@ export const detectSignGesture = async (
     return null;
   }
 };
+
