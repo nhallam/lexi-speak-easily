@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import AppSidebar from "@/components/AppSidebar";
 import VideoStream from "@/components/VideoStream";
@@ -13,6 +13,19 @@ const Index = () => {
     setTranslationText(text);
     setIsTranslating(!!text || text === "");
   };
+  
+  // Listen for clear translation event
+  useEffect(() => {
+    const handleClearTranslation = () => {
+      setTranslationText("");
+    };
+    
+    window.addEventListener('clearTranslation', handleClearTranslation);
+    
+    return () => {
+      window.removeEventListener('clearTranslation', handleClearTranslation);
+    };
+  }, []);
 
   return (
     <SidebarProvider>

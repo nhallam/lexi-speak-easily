@@ -10,6 +10,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { loadHandposeModel, createGestureEstimator, detectSignGesture } from "@/utils/signLanguageDetection";
+import { toast } from "@/components/ui/sonner";
 
 interface VideoStreamProps {
   onTranslationText: (text: string) => void;
@@ -19,15 +21,12 @@ const VideoStream: React.FC<VideoStreamProps> = ({ onTranslationText }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [streaming, setStreaming] = useState(false);
   const [translating, setTranslating] = useState(false);
-  
-  const simulatedPhrases = [
-    "Hello",
-    "My name is",
-    "Nice to meet you",
-    "How are you doing today?",
-    "I'm learning sign language",
-    "This is a demonstration of Lexi"
-  ];
+  const [modelLoaded, setModelLoaded] = useState(false);
+  const [loadingModel, setLoadingModel] = useState(false);
+  const requestRef = useRef<number>();
+  const modelRef = useRef<any>(null);
+  const gestureEstimatorRef = useRef<any>(null);
+  const detectedGesturesRef = useRef<string[]>([]);
   
   // Function to handle starting the video stream
   const startStream = async () => {
@@ -40,9 +39,40 @@ const VideoStream: React.FC<VideoStreamProps> = ({ onTranslationText }) => {
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
         setStreaming(true);
+        
+        // Load model if not already loaded
+        if (!modelLoaded && !loadingModel) {
+          await loadModel();
+        }
       }
     } catch (err) {
       console.error("Error accessing camera:", err);
+      toast.error("Unable to access camera. Please check permissions.");
+    }
+  };
+
+  // Function to load the handpose model
+  const loadModel = async () => {
+    try {
+      setLoadingModel(true);
+      toast.info("Loading sign language detection model...");
+      
+      // Load the handpose model
+      const model = await loadHandposeModel();
+      modelRef.current = model;
+      
+      // Create gesture estimator
+      const gestureEstimator = createGestureEstimator();
+      gestureEstimatorRef.current = gestureEstimator;
+      
+      setModelLoaded(true);
+      setLoadingModel(false);
+      
+      toast.success("Sign language detection model loaded!");
+    } catch (err) {
+      console.error("Error loading model:", err);
+      toast.error("Failed to load sign language detection model.");
+      setLoadingModel(false);
     }
   };
 
@@ -68,48 +98,73 @@ const VideoStream: React.FC<VideoStreamProps> = ({ onTranslationText }) => {
 
   // Toggle translation
   const toggleTranslation = () => {
-    setTranslating(!translating);
+    if (!translating && !modelLoaded && !loadingModel) {
+      toast.info("Please wait while the model loads...");
+      loadModel().then(() => {
+        setTranslating(true);
+      });
+    } else {
+      setTranslating(!translating);
+    }
+    
+    // Reset detected gestures when starting new translation
+    if (!translating) {
+      detectedGesturesRef.current = [];
+      onTranslationText("");
+    }
+  };
+
+  // Perform sign language detection
+  const detectSigns = async () => {
+    if (translating && modelRef.current && videoRef.current && gestureEstimatorRef.current) {
+      try {
+        const gesture = await detectSignGesture(
+          modelRef.current,
+          videoRef.current,
+          gestureEstimatorRef.current
+        );
+        
+        if (gesture) {
+          // Avoid duplicate consecutive gestures
+          const lastGesture = detectedGesturesRef.current[detectedGesturesRef.current.length - 1];
+          
+          if (gesture !== lastGesture) {
+            detectedGesturesRef.current.push(gesture);
+            
+            // Update translation text
+            const translationText = detectedGesturesRef.current.join(" ");
+            onTranslationText(translationText);
+          }
+        }
+      } catch (error) {
+        console.error("Error in sign detection:", error);
+      }
+    }
+    
+    // Continue the animation loop
+    if (translating) {
+      requestRef.current = requestAnimationFrame(detectSigns);
+    }
   };
 
   // Cleanup on unmount
   useEffect(() => {
     return () => {
       stopStream();
+      if (requestRef.current) {
+        cancelAnimationFrame(requestRef.current);
+      }
     };
   }, []);
 
-  // Simulate text generation when translating
+  // Start/stop detection when translating state changes
   useEffect(() => {
-    let timeoutId: NodeJS.Timeout;
-    let currentPhraseIndex = 0;
-    let currentText = "";
-
-    const generateText = () => {
-      if (translating && streaming) {
-        if (currentPhraseIndex < simulatedPhrases.length) {
-          currentText += (currentText ? " " : "") + simulatedPhrases[currentPhraseIndex];
-          onTranslationText(currentText);
-          currentPhraseIndex++;
-          
-          timeoutId = setTimeout(generateText, 2000);
-        }
-      } else {
-        currentPhraseIndex = 0;
-        currentText = "";
-      }
-    };
-
-    if (translating && streaming) {
-      onTranslationText(""); // Reset text when starting
-      timeoutId = setTimeout(generateText, 1000);
-    } else if (!translating) {
-      clearTimeout(timeoutId);
+    if (translating) {
+      requestRef.current = requestAnimationFrame(detectSigns);
+    } else if (requestRef.current) {
+      cancelAnimationFrame(requestRef.current);
     }
-
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, [translating, streaming, onTranslationText]);
+  }, [translating]);
 
   return (
     <div className="flex flex-col h-full relative">
@@ -122,7 +177,7 @@ const VideoStream: React.FC<VideoStreamProps> = ({ onTranslationText }) => {
           muted
         />
         {!streaming && (
-          <div className="video-overlay">
+          <div className="video-overlay absolute inset-0 flex items-center justify-center">
             <Button 
               variant="outline" 
               size="lg" 
@@ -134,12 +189,21 @@ const VideoStream: React.FC<VideoStreamProps> = ({ onTranslationText }) => {
             </Button>
           </div>
         )}
+        
+        {loadingModel && (
+          <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+            <div className="text-white text-center">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white mx-auto mb-2"></div>
+              <p>Loading model...</p>
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="flex justify-between mt-4 absolute bottom-4 left-0 right-0 px-4">
         <Button
           variant={translating ? "destructive" : "default"}
-          disabled={!streaming}
+          disabled={!streaming || loadingModel}
           onClick={toggleTranslation}
           className={!translating ? "bg-lexi-blue hover:bg-lexi-darkblue" : ""}
         >
@@ -151,7 +215,7 @@ const VideoStream: React.FC<VideoStreamProps> = ({ onTranslationText }) => {
           ) : (
             <>
               <Play className="mr-2 h-5 w-5" />
-              Start
+              Start{loadingModel ? " (Loading...)" : ""}
             </>
           )}
         </Button>
@@ -168,6 +232,13 @@ const VideoStream: React.FC<VideoStreamProps> = ({ onTranslationText }) => {
             <DropdownMenuItem>Camera</DropdownMenuItem>
             <DropdownMenuItem>Translation Language</DropdownMenuItem>
             <DropdownMenuItem>Appearance</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => {
+              detectedGesturesRef.current = [];
+              onTranslationText("");
+              toast.success("Translation cleared");
+            }}>
+              Clear Translation
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
