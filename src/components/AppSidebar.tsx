@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Home, Book, Settings, User } from "lucide-react";
+import { Home, Settings, User } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -30,11 +30,6 @@ const sidebarItems = [
     title: "Dashboard",
     url: "#",
     icon: Home,
-  },
-  {
-    title: "Learning",
-    url: "#",
-    icon: Book,
   },
   {
     title: "Settings",
