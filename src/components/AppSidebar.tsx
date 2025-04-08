@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Home, Settings, Search, User, MessageSquare } from "lucide-react";
+import { Home, Settings } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -30,21 +30,6 @@ const sidebarItems = [
     title: "Home",
     url: "#",
     icon: Home,
-  },
-  {
-    title: "Explore",
-    url: "#",
-    icon: Search,
-  },
-  {
-    title: "Messages",
-    url: "#",
-    icon: MessageSquare,
-  },
-  {
-    title: "Profile",
-    url: "#",
-    icon: User,
   },
   {
     title: "Settings",
