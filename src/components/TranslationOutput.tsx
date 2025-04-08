@@ -9,20 +9,20 @@ interface TranslationOutputProps {
 
 const TranslationOutput: React.FC<TranslationOutputProps> = ({ text, isTranslating }) => {
   return (
-    <Card className="w-full">
+    <Card className="w-full h-full flex flex-col justify-center">
       <CardHeader className="pb-2">
-        <CardTitle className="text-lg flex items-center">
+        <CardTitle className="text-lg flex items-center justify-center">
           <span>Translation</span>
           {isTranslating && !text && (
             <span className="ml-2 w-2 h-5 bg-lexi-blue inline-block animate-blink"></span>
           )}
         </CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex items-center justify-center">
         {text ? (
-          <p className="text-lg leading-relaxed">{text}</p>
+          <p className="text-lg leading-relaxed text-center">{text}</p>
         ) : (
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground text-center">
             {isTranslating 
               ? "Waiting for signs to translate..."
               : "Press start to begin translation"}

@@ -26,11 +26,11 @@ const Index = () => {
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 gap-6">
-            <div>
+          <div className="grid md:grid-cols-2 gap-6 h-[calc(100vh-220px)]">
+            <div className="relative h-full">
               <VideoStream onTranslationText={handleTranslationText} />
             </div>
-            <div>
+            <div className="flex items-center">
               <TranslationOutput 
                 text={translationText} 
                 isTranslating={isTranslating} 

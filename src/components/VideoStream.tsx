@@ -112,8 +112,8 @@ const VideoStream: React.FC<VideoStreamProps> = ({ onTranslationText }) => {
   }, [translating, streaming, onTranslationText]);
 
   return (
-    <div className="flex flex-col gap-4">
-      <div className="video-container aspect-video bg-black rounded-lg overflow-hidden">
+    <div className="flex flex-col h-full relative">
+      <div className="video-container aspect-video bg-black rounded-lg overflow-hidden flex-grow">
         <video 
           ref={videoRef}
           className="w-full h-full object-cover"
@@ -136,7 +136,7 @@ const VideoStream: React.FC<VideoStreamProps> = ({ onTranslationText }) => {
         )}
       </div>
 
-      <div className="flex justify-between">
+      <div className="flex justify-between mt-4 absolute bottom-4 left-0 right-0 px-4">
         <Button
           variant={translating ? "destructive" : "default"}
           disabled={!streaming}
