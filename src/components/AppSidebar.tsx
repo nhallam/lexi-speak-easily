@@ -22,6 +22,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import LexiLogo from "./LexiLogo";
 
 // Menu items
 const sidebarItems = [
@@ -51,7 +52,7 @@ export function AppSidebar() {
         <div className="flex h-full flex-col">
           <SidebarContent className="flex-1 pt-6">
             <div className="flex items-center px-6 pb-4">
-              <h2 className="text-2xl font-bold text-lexi-blue">Lexi</h2>
+              <LexiLogo />
             </div>
             
             <SidebarGroup>
