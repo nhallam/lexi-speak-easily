@@ -70,6 +70,14 @@ export default {
 					gray: '#F3F4F6',
 					darkgray: '#4B5563',
 					black: '#1F2937'
+				},
+				airbnb: {
+					red: '#FF5A5F',
+					dark: '#484848',
+					light: '#767676',
+					black: '#222222',
+					white: '#FFFFFF',
+					gray: '#F7F7F7'
 				}
 			},
 			borderRadius: {

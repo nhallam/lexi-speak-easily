@@ -29,17 +29,17 @@ const Index = () => {
 
   return (
     <SidebarProvider>
-      <div className="min-h-screen flex w-full">
+      <div className="min-h-screen flex w-full bg-airbnb-white">
         <AppSidebar />
         <main className="flex-1 p-6 md:p-10 max-w-7xl mx-auto w-full animate-fade-in">
-          <div className="mb-8 text-center">
-            <h1 className="text-3xl font-bold text-lexi-black"></h1>
-            <p className="text-lexi-darkgray mt-2">
+          <div className="mb-12 text-center">
+            <h1 className="text-4xl font-bold text-airbnb-black">Sign Language Translator</h1>
+            <p className="text-airbnb-light mt-3 text-lg">
               Start signing to translate sign language into text in real-time
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 gap-6 h-[calc(100vh-220px)]">
+          <div className="grid md:grid-cols-2 gap-8 h-[calc(100vh-250px)]">
             <div className="relative h-full">
               <VideoStream onTranslationText={handleTranslationText} />
             </div>

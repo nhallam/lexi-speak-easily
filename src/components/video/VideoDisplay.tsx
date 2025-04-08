@@ -21,7 +21,7 @@ const VideoDisplay: React.FC<VideoDisplayProps> = ({
   onToggleTranslation
 }) => {
   return (
-    <div className="video-container aspect-video bg-black rounded-lg overflow-hidden flex-grow relative">
+    <div className="video-container aspect-video bg-black rounded-2xl overflow-hidden flex-grow relative shadow-lg">
       <video 
         ref={videoRef}
         className="w-full h-full object-cover"
@@ -34,7 +34,7 @@ const VideoDisplay: React.FC<VideoDisplayProps> = ({
           <Button 
             variant="outline" 
             size="lg" 
-            className="bg-lexi-blue/80 hover:bg-lexi-blue text-white border-none"
+            className="bg-airbnb-red hover:bg-airbnb-red/90 text-white border-none rounded-lg shadow-md px-6 py-5"
             onClick={onStartStream}
           >
             <Video className="mr-2 h-5 w-5" />
@@ -58,7 +58,9 @@ const VideoDisplay: React.FC<VideoDisplayProps> = ({
             variant={translating ? "destructive" : "default"}
             disabled={loadingModel}
             onClick={onToggleTranslation}
-            className={!translating ? "bg-lexi-blue hover:bg-lexi-darkblue" : ""}
+            className={!translating 
+              ? "bg-airbnb-red hover:bg-airbnb-red/90 text-white rounded-lg shadow-md" 
+              : "bg-airbnb-dark hover:bg-airbnb-dark/90 rounded-lg shadow-md"}
           >
             {translating ? (
               <>

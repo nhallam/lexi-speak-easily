@@ -11,13 +11,13 @@ interface TranslationOutputProps {
 
 const TranslationOutput: React.FC<TranslationOutputProps> = ({ text, isTranslating }) => {
   return (
-    <Card className="w-full h-full flex flex-col justify-center">
-      <CardHeader className="pb-2">
+    <Card className="w-full h-full flex flex-col justify-center border-0 shadow-md rounded-2xl overflow-hidden">
+      <CardHeader className="pb-2 border-b border-gray-100">
         <div className="flex justify-between items-center">
-          <CardTitle className="text-lg flex items-center">
+          <CardTitle className="text-lg text-airbnb-black flex items-center">
             <span>Translation</span>
             {isTranslating && !text && (
-              <span className="ml-2 w-2 h-5 bg-lexi-blue inline-block animate-blink"></span>
+              <span className="ml-2 w-2 h-5 bg-airbnb-red inline-block animate-blink"></span>
             )}
           </CardTitle>
           
@@ -25,8 +25,8 @@ const TranslationOutput: React.FC<TranslationOutputProps> = ({ text, isTranslati
             <Button 
               variant="ghost"
               size="sm"
+              className="text-airbnb-light hover:text-airbnb-red hover:bg-transparent"
               onClick={() => {
-                // We'll handle this through the parent component
                 window.dispatchEvent(new CustomEvent('clearTranslation'));
               }}
             >
@@ -35,11 +35,11 @@ const TranslationOutput: React.FC<TranslationOutputProps> = ({ text, isTranslati
           )}
         </div>
       </CardHeader>
-      <CardContent className="flex items-center justify-center">
+      <CardContent className="flex items-center justify-center p-8">
         {text ? (
-          <p className="text-lg leading-relaxed text-center">{text}</p>
+          <p className="text-xl leading-relaxed text-center text-airbnb-dark">{text}</p>
         ) : (
-          <p className="text-muted-foreground text-center">
+          <p className="text-airbnb-light text-center text-lg">
             {isTranslating 
               ? "Watching for sign language gestures..."
               : "Press start to begin translation"}
