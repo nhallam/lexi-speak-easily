@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Home, Settings, User } from "lucide-react";
+import { Home, Settings } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -73,7 +73,7 @@ export function AppSidebar() {
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="flex w-full items-center gap-3 px-2">
                   <Avatar className="h-9 w-9">
-                    <AvatarImage src="/placeholder.svg" alt="User" />
+                    <AvatarImage src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=80&h=80" alt="User" />
                     <AvatarFallback>JD</AvatarFallback>
                   </Avatar>
                   <div className="flex flex-col items-start text-sm">
