@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -78,6 +77,16 @@ export default {
 					black: '#222222',
 					white: '#FFFFFF',
 					gray: '#F7F7F7'
+				},
+				stripe: {
+					blue: '#635BFF',
+					darkblue: '#0A2540',
+					lightblue: '#7A73FF',
+					gray: '#F6F9FC',
+					darkgray: '#425466',
+					lightgray: '#E3E8EE',
+					white: '#FFFFFF',
+					black: '#1A1F36'
 				}
 			},
 			borderRadius: {

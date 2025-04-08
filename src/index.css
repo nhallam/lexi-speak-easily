@@ -6,82 +6,82 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 222 47% 11%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 222 47% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 222 47% 11%;
 
-    --primary: 358 65% 67%;
+    --primary: 252 100% 68%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary-foreground: 222 47% 11.2%;
 
     --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted-foreground: 215 25% 27%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 252 100% 68%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 358 65% 67%;
+    --ring: 252 100% 68%;
 
-    --radius: 0.75rem;
+    --radius: 0.5rem;
 
     --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 222.2 47.4% 11.2%;
-    --sidebar-primary: 358 65% 67%;
+    --sidebar-foreground: 222 47% 11%;
+    --sidebar-primary: 252 100% 68%;
     --sidebar-primary-foreground: 0 0% 98%;
     --sidebar-accent: 240 4.8% 95.9%;
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 358 65% 67%;
+    --sidebar-ring: 252 100% 68%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 224 71% 4%;
+    --foreground: 213 31% 91%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 224 71% 4%;
+    --card-foreground: 213 31% 91%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 224 71% 4%;
+    --popover-foreground: 213 31% 91%;
 
-    --primary: 358 65% 67%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 252 100% 68%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 217.2 32.6% 17.5%;
+    --secondary: 222 47% 11%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 217.2 32.6% 17.5%;
+    --muted: 223 47% 11%;
     --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 252 100% 68%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --ring: 252 100% 68%;
     
-    --sidebar-background: 222.2 84% 4.9%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 358 65% 67%;
+    --sidebar-background: 224 71% 4%;
+    --sidebar-foreground: 213 31% 91%;
+    --sidebar-primary: 252 100% 68%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 217.2 32.6% 17.5%;
+    --sidebar-accent: 223 47% 11%;
     --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 217.2 32.6% 17.5%;
-    --sidebar-ring: 358 65% 67%;
+    --sidebar-border: 223 47% 11%;
+    --sidebar-ring: 252 100% 68%;
   }
 }
 
@@ -91,14 +91,14 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply bg-stripe-gray text-stripe-darkblue font-sans antialiased;
   }
 }
 
 .video-container {
   position: relative;
   overflow: hidden;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   background-color: black;
 }
 
@@ -115,17 +115,27 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-/* Airbnb-inspired styles */
+/* Stripe-inspired styles */
 @layer components {
-  .airbnb-card {
-    @apply bg-white rounded-2xl shadow-md border-0 overflow-hidden;
+  .stripe-card {
+    @apply bg-white rounded-lg shadow-sm border border-stripe-lightgray overflow-hidden;
   }
   
-  .airbnb-button {
-    @apply bg-airbnb-red text-white rounded-lg font-medium hover:bg-airbnb-red/90;
+  .stripe-button {
+    @apply bg-stripe-blue text-white rounded-md font-medium hover:bg-stripe-lightblue transition-colors;
   }
   
-  .airbnb-container {
+  .stripe-container {
     @apply max-w-7xl mx-auto px-6 sm:px-8 lg:px-10;
   }
+}
+
+/* Keep existing animations */
+.animate-blink {
+  animation: blink 1s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }

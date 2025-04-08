@@ -29,12 +29,12 @@ const Index = () => {
 
   return (
     <SidebarProvider>
-      <div className="min-h-screen flex w-full bg-airbnb-white">
+      <div className="min-h-screen flex w-full bg-stripe-gray">
         <AppSidebar />
         <main className="flex-1 p-6 md:p-10 max-w-7xl mx-auto w-full animate-fade-in">
           <div className="mb-12 text-center">
-            <h1 className="text-4xl font-bold text-airbnb-black">Sign Language Translator</h1>
-            <p className="text-airbnb-light mt-3 text-lg">
+            <h1 className="text-4xl font-bold text-stripe-black">Sign Language Translator</h1>
+            <p className="text-stripe-darkgray mt-3 text-lg">
               Start signing to translate sign language into text in real-time
             </p>
           </div>
