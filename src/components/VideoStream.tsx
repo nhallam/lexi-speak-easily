@@ -83,7 +83,7 @@ const VideoStream: React.FC<VideoStreamProps> = ({ onTranslationText }) => {
         onToggleTranslation={toggleTranslation}
       />
 
-      <div className="flex justify-end mt-4 absolute bottom-4 right-4">
+      <div className="absolute bottom-4 right-4">
         <VideoSettings onClearTranslation={handleClearTranslation} />
       </div>
     </div>

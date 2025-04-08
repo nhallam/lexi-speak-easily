@@ -34,7 +34,7 @@ const VideoDisplay: React.FC<VideoDisplayProps> = ({
           <Button 
             variant="outline" 
             size="lg" 
-            className="bg-airbnb-red hover:bg-airbnb-red/90 text-white border-none rounded-lg shadow-md px-6 py-5"
+            className="absolute bottom-4 bg-stripe-blue hover:bg-stripe-lightblue text-white border-none rounded-lg shadow-md px-6 py-5"
             onClick={onStartStream}
           >
             <Video className="mr-2 h-5 w-5" />
@@ -59,8 +59,8 @@ const VideoDisplay: React.FC<VideoDisplayProps> = ({
             disabled={loadingModel}
             onClick={onToggleTranslation}
             className={!translating 
-              ? "bg-airbnb-red hover:bg-airbnb-red/90 text-white rounded-lg shadow-md" 
-              : "bg-airbnb-dark hover:bg-airbnb-dark/90 rounded-lg shadow-md"}
+              ? "bg-stripe-blue hover:bg-stripe-lightblue text-white rounded-lg shadow-md" 
+              : "bg-stripe-darkblue hover:bg-stripe-darkblue/90 rounded-lg shadow-md"}
           >
             {translating ? (
               <>
